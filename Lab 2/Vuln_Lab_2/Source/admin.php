@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['image_url'])) {
     $url = $_POST['image_url'];
 
     $previewResult = @file_get_contents($url);
+    //http://127.0.0.1/edit_admin.php
+
 }
 
 startLayout("Admin Panel");

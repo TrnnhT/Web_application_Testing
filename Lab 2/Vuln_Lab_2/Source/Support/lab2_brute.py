@@ -1,6 +1,6 @@
 import requests
 
-url = 'http://localhost:2222/forgot.php'  # Change this to your actual lab URL
+url = 'http://localhost:2222/forgot.php'  
 
 username = 'admin'
 

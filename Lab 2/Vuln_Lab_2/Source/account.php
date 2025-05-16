@@ -70,12 +70,6 @@ startLayout("Account");
     </form>
 </div>
 
-<!-- 
-$host = 'db2';
-$user = 'user';
-$pass = 'pass';
-$db   = 'users_db';
--->
 <div style="margin-top: 40px; width: 500px;">
     <h3>Recent Posts</h3>
     <?php while ($row = $statuses->fetch_assoc()): ?>
