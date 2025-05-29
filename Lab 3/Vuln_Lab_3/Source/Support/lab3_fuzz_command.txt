@@ -1,0 +1,2 @@
+ffuf -u http://localhost:3333/FUZZ -w wordlist.txt -mc 200
+ffuf -u http://localhost:3333/FUZZ -w wordlist.txt -e .php,.html,.txt -mc 200

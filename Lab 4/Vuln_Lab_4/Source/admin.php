@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Check if user is logged in and is admin
+// Only allow real 'admin' (not 'admin ') to access this page
 if (!isset($_SESSION['logged_in']) || $_SESSION['username'] !== 'admin') {
     header("Location: login.php");
     exit();
@@ -12,23 +12,39 @@ startLayout("Admin Panel - FakeBook");
 ?>
 
 <h2>Admin Tools</h2>
-<p>Welcome, Admin. Use the tool below to check if the Username is exist in this FakeBook application.</p>
+<p>Welcome, Admin. Use the tool below to check if a user is exists or not in this system.</p>
 
 <form method="GET" action="admin.php">
-    <label>Search Users: </label>
-    <input type="text" name="q" placeholder="Enter username..." required>
+    <label>Search Users:</label>
+    <input type="text" name="search" placeholder="Enter username..." required>
     <button type="submit">Search</button>
 </form>
 
+<br>
+
 <pre>
 <?php
-if (isset($_GET['q'])) {
-    $search = $_GET['q'];
+if (isset($_GET["search"])) {
+    $search = $_GET["search"];
 
-    $cmd = "echo '$search' | grep '' > /dev/null 2>&1";
-    system($cmd);
-    echo "[!] Checked for user matching: $search\n";
-    echo "Result: Username exists or not has been processed (output suppressed).";
+    // Intentionally vulnerable to command injection
+    $command = "cut -d':' -f1 /etc/passwd | grep $search";
+
+    $returned_user = exec($command);
+
+    if ($returned_user == "") {
+        // No output → user not found (real or injected)
+        $result = "<div class='alert alert-danger' role='alert'>
+        <strong>Error!</strong> User <b>$search</b> was not found on the <b>system</b>.
+        </div>";
+    } else {
+        // Any output → consider as 'found'
+        $result = "<div class='alert alert-success' role='alert'>
+        <strong>Success!</strong> User <b>$search</b> was found on the <b>system</b>.
+        </div>";
+    }
+
+    echo $result;
 }
 ?>
 </pre>

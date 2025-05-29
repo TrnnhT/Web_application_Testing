@@ -7,4 +7,4 @@ if ($_SERVER['REMOTE_ADDR'] !== '127.0.0.1') {
 }
 
 // Success
-echo "Congratulation! You now completly lab 2 by exploit successfully SSRF and Insecure Design. Ready for lab 3 ?  ";
+echo "Congratulation! Here is your flag: {lab2_flag_captured}. Ready for lab 3 ?  ";

@@ -7,24 +7,28 @@ $pass = 'pass';
 $db   = 'users_db';
 
 $conn = new mysqli($host, $user, $pass, $db);
-
-// Check connection
 if ($conn->connect_error) {
     die("Database connection failed: " . $conn->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'] ?? '';
+    $username = trim($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    //Deliberately vulnerable to SQL injection (NO hashing or escaping)
-    $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+    $stmt->bind_param("ss", $username, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result && $result->num_rows > 0) {
         $_SESSION['logged_in'] = true;
         $_SESSION['username'] = $username;
-        header("Location: account.php");
+
+        if ($username === 'admin') {
+            header("Location: admin.php");
+        } else {
+            header("Location: account.php");
+        }
         exit();
     } else {
         $error = "Invalid credentials";

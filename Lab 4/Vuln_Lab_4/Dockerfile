@@ -13,6 +13,8 @@ RUN chown -R www-data:www-data /var/www/html && \
     find . -type f -exec chmod 644 {} \; && \
     find . -type d -exec chmod 750 {} \;
 
+RUN echo 'flag{lab4_flag_captured}' >> /etc/passwd
+
 # Install MySQL client and mysqli extension
 RUN apt-get update && \
     apt-get install -y default-mysql-client && \

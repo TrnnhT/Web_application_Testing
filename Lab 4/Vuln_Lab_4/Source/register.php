@@ -18,13 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $birth_year = $_POST['birth_year'] ?? '';
     $favorite_color = $_POST['favorite_color'] ?? '';
 
-    // No hashing - store raw password (intentionally vulnerable)
     $sql = "INSERT INTO users (username, password, grad_year, birth_year, favorite_color) 
             VALUES ('$username', '$password', '$grad_year', '$birth_year', '$favorite_color')";
 
     if ($conn->query($sql) === TRUE) {
         $_SESSION['new_user'] = $username;
-        header("Location: account.php"); 
+        header("Location: register_success.php?username=" . urlencode($username)); 
         exit();
     } else {
         $error = "Error: " . $conn->error;

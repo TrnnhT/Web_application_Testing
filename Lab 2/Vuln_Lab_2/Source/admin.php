@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['image_url'])) {
     $url = $_POST['image_url'];
 
     $previewResult = @file_get_contents($url);
-    //http://127.0.0.1/edit_admin.php
+    //http://127.0.0.1/important_admin.php
 
 }
 
@@ -22,7 +22,7 @@ startLayout("Admin Panel");
 
 <h2>Welcome, Admin</h2>
 
-<h3>🧪 Image Preview Tool</h3>
+<h3> Image Preview Tool</h3>
 <form method="POST">
     <label for="image_url">Enter an image URL to preview:</label><br>
     <input type="text" name="image_url" id="image_url" style="width: 400px;">

@@ -17,9 +17,9 @@ startLayout("Admin Dashboard - FakeBook");
         <li>Discovered a sensitive log file containing login attempts</li>
         <li>Identified a SQL injection vulnerability in the login form</li>
         <li>Used the SQL injection to log in as <strong>admin</strong></li>
+        <li>Used the Broken Access Control to reset password then log in as <strong>admin</strong></li>     
     </ul>
 
-    <p style="margin-top: 20px;">As an admin, you now have access to restricted content. Great work identifying and chaining multiple vulnerabilities to achieve your goal!</p>
-    <p style="margin-top: 20px;">Now can you exploit the final vulnerable lab ?</p>
+    <p style="margin-top: 20px;">Here is your flag {lab3_flag_captured}. Prepare for final lab</p>
     <div style="margin-top: 30px; font-size: 14px; color: #555;">
         <strong>Note for testers:</strong><br>
