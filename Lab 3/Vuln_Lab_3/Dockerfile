@@ -11,7 +11,7 @@ RUN mkdir -p /secret && \
             [2025-05-01 09:05:12] Login attempt: username=john_doe, password=letmein\n\
             [2025-05-01 09:47:33] Login attempt: username=alice, password=hunter2\n\
             [2025-05-01 10:14:56] Login attempt: username=test, password=test\n\
-            [2025-05-01 10:55:42] Login attempt: username=admin, password=123' OR 1=1-- \n\
+            [2025-05-01 10:55:42] Login attempt: username=admin, password=123' OR 1=1#\n\
             [2025-05-01 11:03:01] Login attempt: username=demo, password=qwerty\n\
             [2025-05-01 11:44:20] Login attempt: username=frank, password=spring2025" > /secret/secret.txt && \
     chown www-data:www-data /secret/secret.txt && \

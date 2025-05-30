@@ -7,7 +7,7 @@ USE users_db;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
+  `username` VARBINARY(100) NOT NULL,
   `password` varchar(40) NOT NULL,
   `grad_year` varchar(4),
   `birth_year` varchar(4),

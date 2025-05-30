@@ -20,10 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
     $result = $conn->query($sql);
 
-    if ($result && $result->num_rows > 0) {
+ if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
         $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = $username;
-        header("Location: account.php");
+        $_SESSION['username'] = $row['username'];
+
+        if ($row['username'] === 'admin') {
+            header("Location: admin.php");
+        } else {
+            header("Location: account.php");
+        }
         exit();
     } else {
         $error = "Invalid credentials";

@@ -9,7 +9,6 @@ if (!$username) {
     exit();
 }
 
-// Connect to db3 (same schema as old db2)
 $host = 'db3';
 $user = 'user';
 $pass = 'pass';

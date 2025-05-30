@@ -12,27 +12,29 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username'] ?? '');
-    $password = $_POST['password'] ?? '';
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
-    $stmt->execute();
-    $result = $stmt->get_result();
+$stmt = $conn->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+$stmt->bind_param("ss", $username, $password);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    if ($result && $result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+
+    // Deliberate logic flaw: trim during comparison to check if it's 'admin'
+    if (trim($row['username']) === 'admin') {
+        $_SESSION['username'] = 'admin';
         $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = $username;
-
-        if ($username === 'admin') {
-            header("Location: admin.php");
-        } else {
-            header("Location: account.php");
-        }
-        exit();
+        header("Location: admin.php");
     } else {
-        $error = "Invalid credentials";
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['logged_in'] = true;
+        header("Location: account.php");
     }
+    exit();
+}
 }
 ?>
 

@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($conn->query($sql) === TRUE) {
         $_SESSION['new_user'] = $username;
-        header("Location: register_success.php?username=" . urlencode($username)); 
+        header("Location: login.php"); 
         exit();
     } else {
         $error = "Error: " . $conn->error;
